@@ -1,4 +1,4 @@
-# React Application with unit and end to emd testing
+# React Application with unit and end to end testing
 
 This project consists of a **React-based frontend**  and a **Node.js project** The project includes automated tests for both the API and frontend UI to ensure the application behaves as expected and handles edge cases.
 
