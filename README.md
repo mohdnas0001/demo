@@ -32,45 +32,57 @@ This project consists of a **React-based frontend**  and a **Node.js project** T
 
 ## Installation
 
-1. Clone the Repository
-To get started, clone the repository to your local machine:
+1. Clone the repository:
+    ```
+    git clone https://github.com/mohdnas0001/demo
+    ```
 
-git clone https://github.com/mohdnas0001/demo
+2. Navigate to the project directory:
+    ```
+    cd demo/backend or cd demo/frontend
+    ```
 
-2. Navigate to the Project Directory
-Change to the project directory:
-
-cd demo
-
-3. Install Dependencies for Frontend and Backend
-Install dependencies for both the frontend and backend parts of the project.
-
-For the frontend:
-
-
-cd frontend
-yarn install
-
-cd ../backend
-yarn install
+3. Install the dependencies using yarn:
+    ```
+    yarn install
+    ```
 
 
 4. Run Tests
 
-Frontend Tests
+## Running the Tests
 
-To run unit tests for the React components:
-cd frontend
+The tests are written using **Jest** and **Cypress** for unit and end-to-end testing respectively. You can run the tests with the following command:
+
+```bash
 yarn test
+```
+This command will run all the Jest tests and output the results in the terminal.
 
+## End-to-End Tests (Using Cypress)
+Cypress is used for end-to-end testing, simulating real user interactions to test if the UI behaves as expected.
 
-To run end-to-end (E2E) tests with Cypress:
+## Running Cypress Tests
+To open the Cypress test runner, use:
+
+```bash
 yarn cypress open
-This will open the Cypress test runner, allowing you to execute tests in your browser.
+```
+
+This command opens a browser window with the Cypress interface, where you can run tests interactively. Alternatively, you can run the tests in headless mode:
+
+```bash
+yarn cypress run
+```
+## Test Coverage
+The testing suite includes:
+
+### Unit Tests
+For validating the rendering and behavior of individual components, such as login forms, item management components, and buttons.
+
+### E2E Tests
+For simulating user interactions (e.g., logging in, creating items, updating items, and deleting items) to verify that the full flow works from start to finish.
 
 
-API Tests
 
-To run API tests for authentication, CRUD operations, and response validation:
-cd backend
-yarn test
+

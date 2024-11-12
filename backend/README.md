@@ -45,31 +45,12 @@ This project consists of a suite of automated tests for an API that includes aut
 
 ## Running the Tests
 
-Unit Tests (Using Jest)
+### Unit Tests (Using Jest)
 Unit tests are written for individual React components to ensure that they render correctly and behave as expected.
 
-Running Jest Tests
-
+#### Running Jest Tests
 To run unit tests for your components:
 
+```bash
 yarn test
-This will run all the Jest tests and output the results in the terminal.
-
-End-to-End Tests (Using Cypress)
-Cypress is used for end-to-end testing, simulating real user interactions to test if the UI behaves as expected.
-
-Running Cypress Tests
-
-To run Cypress tests, open the Cypress test runner:
-
-yarn cypress open
-This will open a browser window with the Cypress interface. You can then run the tests from the UI. Alternatively, you can run the tests in headless mode:
-
-
-yarn cypress run
-Test Coverage
-The testing suite includes:
-
-Unit Tests: For validating the rendering and behavior of individual components such as login forms, item management components, and buttons.
-E2E Tests: For simulating user interactions (e.g., logging in, creating items, updating items, and deleting items) to verify that the full flow works from start to finish.
-
+```
