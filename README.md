@@ -1,92 +1,76 @@
-React CRUD Application with Authentication
-This project is a simple React-based user interface for user registration, login, and item management (create, view, update, and delete operations). It also includes automated tests using Cypress for end-to-end testing and Jest for unit testing.
+# React Application with unit and end to emd testing
 
-Features
-User Authentication: Registration and login.
-Item Management: View, create, update, and delete items.
-Notification Messages: Displays success and error messages for user actions.
-Prerequisites
-Node.js (v14 or higher) and npm or Yarn for package management.
-Backend Server with endpoints for authentication and item management.
-Database (if required by the backend).
+This project consists of a **React-based frontend**  and a **Node.js project** The project includes automated tests for both the API and frontend UI to ensure the application behaves as expected and handles edge cases.
 
-Project Setup
-1. Backend Setup
-The project requires a backend server for handling authentication and CRUD operations. If the backend is included within this repository, follow these instructions:
+## Features
 
+### Frontend (React UI)
+- **User Authentication**: Users can register and log in.
+- **Item Management**: Users can view, create, update, and delete items.
+- **Success/Error Messages**: Appropriate success, error, and validation messages are displayed for different actions.
+- **Responsive Layout**: The UI is responsive and works well on mobile and desktop screens.
 
-2. Frontend Setup
-Navigate to the frontend directory:
+### API Test
+- **Authentication**
+- **CRUD Operations**
+- **Response Validation**
+
+### Testing
+
+#### Frontend Tests
+- **Jest**: For unit tests of individual React components.
+- **Cypress**: For end-to-end testing of user interactions with the frontend.
+
+#### API Tests
+- **Jest** and **Supertest**: For API tests (authentication, CRUD operations, and response validation).
+
+## Prerequisites
+
+- Node.js installed (preferably the latest stable version).
+- Access to the backend API (set in the `baseUrl`).
+- Valid credentials for test users (replace with actual credentials if needed).
+
+## Installation
+
+1. Clone the Repository
+To get started, clone the repository to your local machine:
+
+git clone https://github.com/mohdnas0001/demo
+
+2. Navigate to the Project Directory
+Change to the project directory:
+
+cd demo
+
+3. Install Dependencies for Frontend and Backend
+Install dependencies for both the frontend and backend parts of the project.
+
+For the frontend:
 
 
 cd frontend
+yarn install
 
-npm install
-Set up environment variables:
-
-Create a .env file in the frontend directory with the backend API URL:
-
-env
-Copy code
-REACT_APP_API_URL=http://localhost:5000
-Run the frontend application:
-
-bash
-Copy code
-npm start
-The frontend application should now be accessible at http://localhost:3000.
-
-Testing
-This project uses Cypress for end-to-end testing and Jest for unit tests.
-
-Cypress (End-to-End Tests)
-Start the frontend and backend servers if they are not running.
-
-npx cypress open
-Run Tests: Select tests from the Cypress UI to run the end-to-end tests.
-Jest (Unit Tests)
-Run the unit tests:
+cd ../backend
+yarn install
 
 
-npm test
-Jest will automatically search for test files with .test.js or .spec.js extensions in the project.
+4. Run Tests
 
-API Endpoints
-Here are the main API endpoints used in this application:
+Frontend Tests
 
-Authentication:
-
-POST /auth/register - Register a new user.
-POST /auth/login - Log in an existing user.
-Items:
-
-GET /items - Get a list of items.
-POST /items - Create a new item.
-PUT /items/:id - Update an item.
-DELETE /items/:id - Delete an item.
-Folder Structure
-
-root
-│
-├── backend                # Backend application
-│   ├── controllers        # API controllers
-│   ├── models             # Database models
-│   ├── routes             # API routes
-│   └── ...
-│
-└── frontend               # Frontend React application
-    ├── src
-    │   ├── components     # React components
-    │   ├── context        # Authentication context
-    │   ├── hooks          # Custom React hooks
-    │   ├── pages          # Application pages
-    │   ├── tests          # Jest tests
-    │   └── ...
-    ├── public
-    └── ...
-Notes
-Ensure both backend and frontend .env files are set up with the correct URLs and keys.
+To run unit tests for the React components:
+cd frontend
+yarn test
 
 
-Author
-Your Name – Mohammed Bala Nasir.# demo
+To run end-to-end (E2E) tests with Cypress:
+yarn cypress open
+This will open the Cypress test runner, allowing you to execute tests in your browser.
+
+
+API Tests
+
+To run API tests for authentication, CRUD operations, and response validation:
+cd backend
+yarn test

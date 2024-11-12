@@ -7,10 +7,17 @@ import 'react-toastify/dist/ReactToastify.css';
 import { createItem, deleteItem, updateItem } from '../../../api/item';
 import Swal from 'sweetalert2';
 import { format, isValid } from 'date-fns';
+import { useNavigate } from 'react-router-dom';
+import useItemStore from 'src/hooks/useItemStore';
 
 const ItemList = () => {
   const { data: items, error, isLoading, isError, refetch } = useFetchItems();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const navigate = useNavigate();
+  
+    const setSelectedItem = useItemStore((state) => state.setSelectedItem); // Zustand setter function
+
+
  const [formData, setFormData] = useState<{ name: string; description: string; id: number | null }>({
     name: '',
     description: '',
@@ -73,21 +80,26 @@ const ItemList = () => {
     }
   };
 
+  const handleItemClick = (item: Item) => {
+    setSelectedItem(item);  // Store the selected item in Zustand and localStorage
+    navigate(`/item`);
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error: {error?.message}</div>;
 
   return (
     <div className="p-2 md:p-6">
       <ToastContainer />
-      <div className="flex flex-row w-full justify-between items-center border-b border-gray-300 mb-3 md:mb-6">
-        <h1 className="text-xl md:text-2xl font-bold mb-3 md:mb-6 text-center">
+      <div className="flex flex-row items-center justify-between w-full mb-3 border-b border-gray-300 md:mb-6">
+        <h1 className="mb-3 text-xl font-bold text-center md:text-2xl md:mb-6">
           My Items List
         </h1>
 
         <div className="flex justify-center mb-3 md:mb-6">
           <button
             onClick={openCreateDialog}
-            className="p-1 md:p-2 md:px-4 text-base bg-green-500 text-white rounded-md shadow-lg hover:bg-green-600 transition duration-200"
+            className="p-1 text-base text-white transition duration-200 bg-green-500 rounded-md shadow-lg md:p-2 md:px-4 hover:bg-green-600"
           >
             Add new item
           </button>
@@ -95,18 +107,19 @@ const ItemList = () => {
       </div>
 
       {items?.length === 0 ? (
-        <div className="text-center text-gray-500 mt-4">
+        <div className="mt-4 text-center text-gray-500">
           <p>No items found. Click "Add new item" to add a new item.</p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
           {items?.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-lg p-2 md:p-6 relative border-2 border-gray-100 hover:border-blue-500 hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
+              onClick={() => handleItemClick(item)}  // Click to select item and navigate
+              className="relative p-2 transition-transform duration-300 transform bg-white border-2 border-gray-100 rounded-lg md:p-6 hover:border-blue-500 hover:shadow-xl hover:scale-105"
             >
-              <h3 className="text-xl font-semibold mb-2">{item.name}</h3>
-              <p className="text-gray-700 mb-4 h-24 overflow-hidden text-ellipsis">
+              <h3 className="mb-2 text-xl font-semibold">{item.name}</h3>
+              <p className="h-24 mb-4 overflow-hidden text-gray-700 text-ellipsis">
                 {item.description}
               </p>
 
@@ -124,17 +137,17 @@ const ItemList = () => {
                   </p>
                 )}
 
-              <div className="absolute top-0 right-0 md:top-3  mdright-3 flex space-x-1 md:space-x-2">
+              <div className="absolute top-0 right-0 flex space-x-1 md:top-3 mdright-3 md:space-x-2">
                 <button
                   onClick={() => openEditDialog(item)}
-                  className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded-full transition duration-200"
+                  className="p-2 text-blue-500 transition duration-200 rounded-full hover:text-blue-700 hover:bg-blue-100"
                   aria-label="Edit"
                 >
                   <PencilSimple size={24} />
                 </button>
                 <button
                   onClick={() => handleDelete(item.id)}
-                  className="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded-full transition duration-200"
+                  className="p-2 text-red-500 transition duration-200 rounded-full hover:text-red-700 hover:bg-red-100"
                   aria-label="Delete"
                 >
                   <Trash size={24} />
@@ -148,7 +161,7 @@ const ItemList = () => {
       {isDialogOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-3 md:p-6 rounded-lg shadow-lg w-80 md:w-[28rem]">
-            <h2 className="text-xl md:text-2xl font-semibold mb-4">
+            <h2 className="mb-4 text-xl font-semibold md:text-2xl">
               {formData.id ? 'Edit Item' : 'Create New Item'}
             </h2>
             <input
@@ -156,7 +169,7 @@ const ItemList = () => {
               placeholder="Item Name"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full p-2 border border-gray-300 rounded-md mb-4"
+              className="w-full p-2 mb-4 border border-gray-300 rounded-md"
             />
             <textarea
               placeholder="Item Description"
@@ -164,9 +177,9 @@ const ItemList = () => {
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
-              className="w-full p-2 border border-gray-300 rounded-md mb-4"
+              className="w-full p-2 mb-4 border border-gray-300 rounded-md"
             />
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <button
                 onClick={closeDialog}
                 className="text-gray-500 hover:text-gray-700"
@@ -175,7 +188,7 @@ const ItemList = () => {
               </button>
               <button
                 onClick={handleSubmit}
-                className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-600"
+                className="px-6 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
               >
                 {formData.id ? 'Update Item' : 'Create Item'}
               </button>

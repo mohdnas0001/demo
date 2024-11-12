@@ -1,14 +1,10 @@
-import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { toast } from 'react-toastify';
 import { createItem, updateItem, deleteItem } from '../../api/item';
 import ItemList from '../../components/home/item-list';
 import { useFetchItems } from '../../hooks/useItemsHooks';
 
-// Mock useFetchItems hook
-jest.mock('../../hooks/useItemsHooks.ts', () => ({
-  useFetchItems: jest.fn(),
-}));
+
 
 // Mock createItem function
 jest.mock('../../api/item', () => ({

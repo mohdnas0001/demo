@@ -7,6 +7,9 @@ export const fetchItems = async (): Promise<Item[]> => {
   return response.data;
 };
 
+
+
+
 // Create a new item
 export const createItem = async (
   newItem: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>,
