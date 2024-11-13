@@ -33,20 +33,22 @@ This project consists of a **React-based frontend**  and a **Node.js project** T
 ## Installation
 
 1. Clone the repository:
+    
     ```
     git clone https://github.com/mohdnas0001/demo
     ```
 
 2. Navigate to the project directory:
+    
     ```
     cd demo/backend or cd demo/frontend
     ```
 
 3. Install the dependencies using yarn:
+   
     ```
     yarn install
     ```
-
 
 4. Run Tests
 
@@ -82,7 +84,6 @@ For validating the rendering and behavior of individual components, such as logi
 
 ### E2E Tests
 For simulating user interactions (e.g., logging in, creating items, updating items, and deleting items) to verify that the full flow works from start to finish.
-
 
 
 

@@ -71,6 +71,8 @@ To open the Cypress test runner, use:
 yarn cypress open
 ```
 
+fp5128883@gmail.com
+
 This command opens a browser window with the Cypress interface, where you can run tests interactively. Alternatively, you can run the tests in headless mode:
 
 ```bash
@@ -84,7 +86,3 @@ For validating the rendering and behavior of individual components, such as logi
 
 ### E2E Tests
 For simulating user interactions (e.g., logging in, creating items, updating items, and deleting items) to verify that the full flow works from start to finish.
-
-
-
-
