@@ -26,7 +26,7 @@ This project consists of a **React-based frontend**  and a **Node.js project** T
 
 ## Prerequisites
 
-- Node.js installed (preferably the latest stable version).
+- Node _v18+_
 - Access to the backend API (set in the `baseUrl`).
 - Valid credentials for test users (replace with actual credentials if needed).
 
