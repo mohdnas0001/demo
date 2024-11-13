@@ -54,7 +54,7 @@ const LoginComponent: React.FC = () => {
   };
 
   const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword); 
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -76,7 +76,7 @@ const LoginComponent: React.FC = () => {
           <div className="relative mb-4">
             {" "}
             <input
-              type={showPassword ? "text" : "password"} 
+              type={showPassword ? "text" : "password"}
               name="password"
               value={credentials.password}
               onChange={handleChange}

@@ -16,7 +16,7 @@ const SignUpComponent: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false); 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +42,7 @@ const SignUpComponent: React.FC = () => {
 
     try {
       // Attempt signup; if successful, navigate to login page
-      await signup(credentials); 
+      await signup(credentials);
       navigate("/login");
     } catch (error: any) {
       console.error("Error details:", error); // Log full error details
@@ -64,7 +64,7 @@ const SignUpComponent: React.FC = () => {
         toast.error("Network error. Please check your connection.");
       }
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
   };
 

@@ -128,7 +128,7 @@ const ItemList = () => {
           {items?.map((item) => (
             <div
               key={item.id}
-              onClick={() => handleItemClick(item)}
+              // onClick={() => handleItemClick(item)}
               className="relative p-2 transition-transform duration-300 transform bg-white border-2 border-gray-100 rounded-lg md:p-6 hover:border-blue-500 hover:shadow-xl hover:scale-105"
             >
               <h3 className="mb-2 text-xl font-semibold">{item.name}</h3>
@@ -136,19 +136,21 @@ const ItemList = () => {
                 {item.description}
               </p>
 
-              <p className="text-sm text-gray-500">
-                Created:{" "}
-                {item.createdAt && isValid(new Date(item.createdAt))
-                  ? format(new Date(item.createdAt), "PPpp")
-                  : "Unknown"}
-              </p>
-              {item.updatedAt &&
-                item.updatedAt !== item.createdAt &&
-                isValid(new Date(item.updatedAt)) && (
-                  <p className="text-sm text-gray-500">
-                    Last Updated: {format(new Date(item.updatedAt), "PPpp")}
-                  </p>
-                )}
+              <div className="h-12">
+                <p className="text-sm text-gray-500">
+                  Created:{" "}
+                  {item.createdAt && isValid(new Date(item.createdAt))
+                    ? format(new Date(item.createdAt), "PPpp")
+                    : "Unknown"}
+                </p>
+                {item.updatedAt &&
+                  item.updatedAt !== item.createdAt &&
+                  isValid(new Date(item.updatedAt)) && (
+                    <p className="text-sm text-gray-500">
+                      Last Updated: {format(new Date(item.updatedAt), "PPpp")}
+                    </p>
+                  )}
+              </div>
 
               <div className="absolute top-0 right-0 flex space-x-1 md:top-3 mdright-3 md:space-x-2">
                 <button
@@ -166,6 +168,12 @@ const ItemList = () => {
                   <Trash size={24} />
                 </button>
               </div>
+              <button
+                onClick={() => handleItemClick(item)}
+                className="w-full py-2 mt-4 text-center text-white bg-blue-500 rounded-md hover:bg-blue-600"
+              >
+                View Item
+              </button>
             </div>
           ))}
         </div>

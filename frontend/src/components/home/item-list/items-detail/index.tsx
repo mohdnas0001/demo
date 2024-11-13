@@ -32,7 +32,7 @@ const ItemDetails = () => {
   }, [selectedItem]);
 
   const handleBackClick = () => {
-    navigate("./");
+    navigate(".."); // Navigate one level back
   };
 
   if (!selectedItem) {
@@ -64,30 +64,33 @@ const ItemDetails = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="relative w-full max-w-4xl p-8 space-y-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg">
+    <div className="flex flex-col items-center justify-center h-screen">
+      <div className="flex justify-start w-full max-w-4xl">
         <button
           onClick={handleBackClick}
-          className="absolute p-2 text-black rounded-full top-4 left-4 hover:bg-primary-500"
+          className="p-2 mb-4 text-black rounded-full hover:bg-primary-500"
         >
           &larr; Back
         </button>
-
+      </div>
+      <div className="relative w-full max-w-4xl p-8 space-y-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg">
         <h1 className="mb-4 text-4xl font-bold text-center">
           {itemDetails.name}
         </h1>
         <p className="mb-4 text-lg text-center text-gray-700">
           {itemDetails.description}
         </p>
-        <p className="text-sm text-center text-gray-500">
-          Created at: {itemDetails.createdAt}
-        </p>
-        {itemDetails.updatedAt &&
-          itemDetails.updatedAt !== itemDetails.createdAt && (
-            <p className="text-sm text-center text-gray-500">
-              Last updated: {itemDetails.updatedAt}
-            </p>
-          )}
+        <div>
+          <p className="text-sm text-center text-gray-500">
+            Created at: {itemDetails.createdAt}
+          </p>
+          {itemDetails.updatedAt &&
+            itemDetails.updatedAt !== itemDetails.createdAt && (
+              <p className="text-sm text-center text-gray-500">
+                Last updated: {itemDetails.updatedAt}
+              </p>
+            )}
+        </div>
       </div>
     </div>
   );

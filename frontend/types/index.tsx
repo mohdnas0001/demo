@@ -17,9 +17,8 @@ export interface AuthState {
   clearUser: () => void;
 }
 
-
 export interface ItemStore {
-  selectedItem: Item | null; 
+  selectedItem: Item | null;
   setSelectedItem: (item: Item) => void;
 }
 
