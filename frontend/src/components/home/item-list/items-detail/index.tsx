@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import useItemStore from 'src/hooks/useItemStore';
-import { Item } from 'types';
-import { useNavigate } from 'react-router-dom';
-import { fetchItemById } from 'src/api/item/item-by-id';
+import React, { useEffect, useState } from "react";
+import useItemStore from "src/hooks/useItemStore";
+import { Item } from "types";
+import { useNavigate } from "react-router-dom";
+import { fetchItemById } from "src/api/item/item-by-id";
 
 const ItemDetails = () => {
   const selectedItem = useItemStore((state) => state.selectedItem);
@@ -16,12 +16,12 @@ const ItemDetails = () => {
       const fetchDetails = async () => {
         setLoading(true);
         setError(null);
-        
+
         try {
           const data = await fetchItemById(selectedItem.id);
           setItemDetails(data);
         } catch {
-          setError('Failed to fetch item details. Please try again later.');
+          setError("Failed to fetch item details. Please try again later.");
         } finally {
           setLoading(false);
         }
@@ -32,7 +32,7 @@ const ItemDetails = () => {
   }, [selectedItem]);
 
   const handleBackClick = () => {
-    navigate('./'); 
+    navigate("./");
   };
 
   if (!selectedItem) {
@@ -41,7 +41,10 @@ const ItemDetails = () => {
 
   if (loading) {
     return (
-      <div data-testid="loading-spinner" className="flex items-center justify-center h-screen">
+      <div
+        data-testid="loading-spinner"
+        className="flex items-center justify-center h-screen"
+      >
         <div className="w-full max-w-4xl p-8 space-y-6 bg-white border-2 border-gray-300 rounded-lg shadow-lg animate-pulse">
           <div className="w-1/3 h-8 mx-auto bg-gray-200 rounded"></div>
           <div className="w-2/3 h-6 mx-auto bg-gray-200 rounded"></div>
@@ -70,12 +73,21 @@ const ItemDetails = () => {
           &larr; Back
         </button>
 
-        <h1 className="mb-4 text-4xl font-bold text-center">{itemDetails.name}</h1>
-        <p className="mb-4 text-lg text-center text-gray-700">{itemDetails.description}</p>
-        <p className="text-sm text-center text-gray-500">Created at: {itemDetails.createdAt}</p>
-        {itemDetails.updatedAt && itemDetails.updatedAt !== itemDetails.createdAt && (
-          <p className="text-sm text-center text-gray-500">Last updated: {itemDetails.updatedAt}</p>
-        )}
+        <h1 className="mb-4 text-4xl font-bold text-center">
+          {itemDetails.name}
+        </h1>
+        <p className="mb-4 text-lg text-center text-gray-700">
+          {itemDetails.description}
+        </p>
+        <p className="text-sm text-center text-gray-500">
+          Created at: {itemDetails.createdAt}
+        </p>
+        {itemDetails.updatedAt &&
+          itemDetails.updatedAt !== itemDetails.createdAt && (
+            <p className="text-sm text-center text-gray-500">
+              Last updated: {itemDetails.updatedAt}
+            </p>
+          )}
       </div>
     </div>
   );

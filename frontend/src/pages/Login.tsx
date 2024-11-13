@@ -3,7 +3,7 @@ import LoginComponent from "src/components/login";
 const LoginPage = () => {
   return (
     <div>
-      <LoginComponent/>
+      <LoginComponent />
     </div>
   );
 };

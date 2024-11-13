@@ -1,27 +1,27 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { signup } from '../../api/auth';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { Eye, EyeSlash } from '@phosphor-icons/react';
-import { Link } from 'react-router-dom';
-import { UserCredentials } from 'types';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { signup } from "../../api/auth";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Eye, EyeSlash } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
+import { UserCredentials } from "types";
 
 const SignUpComponent: React.FC = () => {
   const [credentials, setCredentials] = useState<UserCredentials>({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
-  const [confirmPassword, setConfirmPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [showConfirmPassword, setShowConfirmPassword] =
     useState<boolean>(false);
-  const [isLoading, setIsLoading] = useState<boolean>(false); // New state for loading
+  const [isLoading, setIsLoading] = useState<boolean>(false); 
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (name === 'password' || name === 'username') {
+    if (name === "password" || name === "username") {
       setCredentials({
         ...credentials,
         [name]: value,
@@ -30,45 +30,43 @@ const SignUpComponent: React.FC = () => {
       setConfirmPassword(value);
     }
   };
-const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
-  setIsLoading(true);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
 
-   if (credentials.password !== confirmPassword) {
-      toast.error('Passwords do not match. Please try again.');
+    if (credentials.password !== confirmPassword) {
+      toast.error("Passwords do not match. Please try again.");
       setIsLoading(false);
       return;
     }
 
-  try {
-    // Attempt signup; if successful, navigate to login page
-    await signup(credentials); // Call the signup API
-    navigate('/login');
-  } catch (error: any) {
-    console.error('Error details:', error); // Log full error details
+    try {
+      // Attempt signup; if successful, navigate to login page
+      await signup(credentials); 
+      navigate("/login");
+    } catch (error: any) {
+      console.error("Error details:", error); // Log full error details
 
-    // Check if error contains a response (common with Axios errors)
-    if (error.response) {
-      // Display specific error messages based on status codes
-      switch (error.response.status) {
-        case 400:
-          toast.error('Username already exists.');
-          break;
-        case 500:
-          toast.error('Server error. Please try again later.');
-          break;
-        default:
-          toast.error('An unexpected error occurred. Please try again.');
+      if (error.response) {
+        // Display specific error messages based on status codes
+        switch (error.response.status) {
+          case 400:
+            toast.error("Username already exists.");
+            break;
+          case 500:
+            toast.error("Server error. Please try again later.");
+            break;
+          default:
+            toast.error("An unexpected error occurred. Please try again.");
+        }
+      } else {
+        // Handle cases where response data is unavailable (network or other issues)
+        toast.error("Network error. Please check your connection.");
       }
-    } else {
-      // Handle cases where response data is unavailable (network or other issues)
-      toast.error('Network error. Please check your connection.');
+    } finally {
+      setIsLoading(false); 
     }
-  } finally {
-    setIsLoading(false); // Reset loading state after the request completes
-  }
-};
-
+  };
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -80,7 +78,7 @@ const handleSubmit = async (e: React.FormEvent) => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 border border-gray-300 rounded-lg bg-white shadow-md">
+      <div className="w-full max-w-md p-8 bg-white border border-gray-300 rounded-lg shadow-md">
         <h1 className="mb-6 text-2xl font-bold text-center">Sign Up</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -94,9 +92,9 @@ const handleSubmit = async (e: React.FormEvent) => {
               className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
             />
           </div>
-          <div className="mb-4 relative">
+          <div className="relative mb-4">
             <input
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               name="password"
               value={credentials.password}
               onChange={handleChange}
@@ -107,15 +105,15 @@ const handleSubmit = async (e: React.FormEvent) => {
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute right-2 top-2 text-gray-500"
+              className="absolute text-gray-500 right-2 top-2"
               aria-label="Toggle password visibility"
             >
               {showPassword ? <EyeSlash size={24} /> : <Eye size={24} />}
             </button>
           </div>
-          <div className="mb-4 relative">
+          <div className="relative mb-4">
             <input
-              type={showConfirmPassword ? 'text' : 'password'}
+              type={showConfirmPassword ? "text" : "password"}
               name="confirmPassword"
               value={confirmPassword}
               onChange={handleChange}
@@ -126,7 +124,7 @@ const handleSubmit = async (e: React.FormEvent) => {
             <button
               type="button"
               onClick={toggleConfirmPasswordVisibility}
-              className="absolute right-2 top-2 text-gray-500"
+              className="absolute text-gray-500 right-2 top-2"
               aria-label="Confirm Toggle password visibility"
             >
               {showConfirmPassword ? <EyeSlash size={24} /> : <Eye size={24} />}
@@ -135,10 +133,10 @@ const handleSubmit = async (e: React.FormEvent) => {
           <div>
             <button
               type="submit"
-              disabled={isLoading} // Disable the button while loading
-              className={`w-full py-2 text-white ${isLoading ? 'bg-gray-500' : 'bg-blue-600'} rounded hover:bg-blue-700 focus:outline-none`}
+              disabled={isLoading}
+              className={`w-full py-2 text-white ${isLoading ? "bg-gray-500" : "bg-blue-600"} rounded hover:bg-blue-700 focus:outline-none`}
             >
-              {isLoading ? 'Registering...' : 'Register'}
+              {isLoading ? "Registering..." : "Register"}
             </button>
           </div>
         </form>

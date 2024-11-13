@@ -6,7 +6,6 @@ jest.setTimeout(10000);
 let token: string;
 let itemId: string;
 
-// Log in and create an item before running delete tests
 beforeAll(async () => {
   // Log in and obtain token
   const loginResponse = await request(baseUrl)

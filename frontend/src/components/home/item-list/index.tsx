@@ -1,42 +1,49 @@
-import React, { useState, useCallback } from 'react';
-import { useFetchItems } from '../../../hooks/useItemsHooks';
-import { Item } from '../../../../types';
-import { PencilSimple, Trash } from '@phosphor-icons/react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { createItem, deleteItem, updateItem } from '../../../api/item';
-import Swal from 'sweetalert2';
-import { format, isValid } from 'date-fns';
-import { useNavigate } from 'react-router-dom';
-import useItemStore from 'src/hooks/useItemStore';
+import React, { useState, useCallback } from "react";
+import { useFetchItems } from "../../../hooks/useItemsHooks";
+import { Item } from "../../../../types";
+import { PencilSimple, Trash } from "@phosphor-icons/react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { createItem, deleteItem, updateItem } from "../../../api/item";
+import Swal from "sweetalert2";
+import { format, isValid } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import useItemStore from "src/hooks/useItemStore";
 
 const ItemList = () => {
   const { data: items, error, isLoading, isError, refetch } = useFetchItems();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const navigate = useNavigate();
-  
-    const setSelectedItem = useItemStore((state) => state.setSelectedItem); // Zustand setter function
 
+  const setSelectedItem = useItemStore((state) => state.setSelectedItem);
 
- const [formData, setFormData] = useState<{ name: string; description: string; id: number | null }>({
-    name: '',
-    description: '',
+  const [formData, setFormData] = useState<{
+    name: string;
+    description: string;
+    id: number | null;
+  }>({
+    name: "",
+    description: "",
     id: null,
   });
 
   const openCreateDialog = useCallback(() => {
-    setFormData({ name: '', description: '', id: null });
+    setFormData({ name: "", description: "", id: null });
     setIsDialogOpen(true);
   }, []);
 
   const openEditDialog = (item: Item) => {
-    setFormData({ name: item.name, description: item.description, id: item.id });
+    setFormData({
+      name: item.name,
+      description: item.description,
+      id: item.id,
+    });
     setIsDialogOpen(true);
   };
 
   const closeDialog = () => {
     setIsDialogOpen(false);
-    setFormData({ name: '', description: '', id: null });
+    setFormData({ name: "", description: "", id: null });
   };
 
   const handleSubmit = async () => {
@@ -45,43 +52,49 @@ const ItemList = () => {
     }
     try {
       if (formData.id) {
-        await updateItem(formData.id, { name: formData.name, description: formData.description });
-        toast.success('Item updated successfully!');
+        await updateItem(formData.id, {
+          name: formData.name,
+          description: formData.description,
+        });
+        toast.success("Item updated successfully!");
       } else {
-        await createItem({ name: formData.name, description: formData.description });
-        toast.success('Item created successfully!');
+        await createItem({
+          name: formData.name,
+          description: formData.description,
+        });
+        toast.success("Item created successfully!");
       }
       refetch();
       closeDialog();
     } catch (err) {
-      toast.error('Failed to save item. Please try again.');
+      toast.error("Failed to save item. Please try again.");
     }
   };
 
   const handleDelete = async (itemId: number) => {
     const result = await Swal.fire({
-      title: 'Are you sure?',
-      text: 'Do you really want to delete this item?',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "Do you really want to delete this item?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
     });
 
     if (result.isConfirmed) {
       try {
         await deleteItem(itemId);
-        toast.success('Item deleted successfully!');
+        toast.success("Item deleted successfully!");
         refetch();
       } catch (err) {
-        toast.error('Failed to delete item. Please try again.');
+        toast.error("Failed to delete item. Please try again.");
       }
     }
   };
 
   const handleItemClick = (item: Item) => {
-    setSelectedItem(item);  // Store the selected item in Zustand and localStorage
+    setSelectedItem(item); // Store the selected item in Zustand and localStorage
     navigate(`/item`);
   };
 
@@ -115,7 +128,7 @@ const ItemList = () => {
           {items?.map((item) => (
             <div
               key={item.id}
-              onClick={() => handleItemClick(item)}  // Click to select item and navigate
+              onClick={() => handleItemClick(item)}
               className="relative p-2 transition-transform duration-300 transform bg-white border-2 border-gray-100 rounded-lg md:p-6 hover:border-blue-500 hover:shadow-xl hover:scale-105"
             >
               <h3 className="mb-2 text-xl font-semibold">{item.name}</h3>
@@ -124,16 +137,16 @@ const ItemList = () => {
               </p>
 
               <p className="text-sm text-gray-500">
-                Created:{' '}
+                Created:{" "}
                 {item.createdAt && isValid(new Date(item.createdAt))
-                  ? format(new Date(item.createdAt), 'PPpp')
-                  : 'Unknown'}
+                  ? format(new Date(item.createdAt), "PPpp")
+                  : "Unknown"}
               </p>
               {item.updatedAt &&
                 item.updatedAt !== item.createdAt &&
                 isValid(new Date(item.updatedAt)) && (
                   <p className="text-sm text-gray-500">
-                    Last Updated: {format(new Date(item.updatedAt), 'PPpp')}
+                    Last Updated: {format(new Date(item.updatedAt), "PPpp")}
                   </p>
                 )}
 
@@ -162,13 +175,15 @@ const ItemList = () => {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-3 md:p-6 rounded-lg shadow-lg w-80 md:w-[28rem]">
             <h2 className="mb-4 text-xl font-semibold md:text-2xl">
-              {formData.id ? 'Edit Item' : 'Create New Item'}
+              {formData.id ? "Edit Item" : "Create New Item"}
             </h2>
             <input
               type="text"
               placeholder="Item Name"
               value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
               className="w-full p-2 mb-4 border border-gray-300 rounded-md"
             />
             <textarea
@@ -190,7 +205,7 @@ const ItemList = () => {
                 onClick={handleSubmit}
                 className="px-6 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600"
               >
-                {formData.id ? 'Update Item' : 'Create Item'}
+                {formData.id ? "Update Item" : "Create Item"}
               </button>
             </div>
           </div>

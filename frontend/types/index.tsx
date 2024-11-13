@@ -16,3 +16,15 @@ export interface AuthState {
   setUsername: (username: string) => void;
   clearUser: () => void;
 }
+
+
+export interface ItemStore {
+  selectedItem: Item | null; 
+  setSelectedItem: (item: Item) => void;
+}
+
+export interface AuthState {
+  username: string;
+  setUsername: (username: string) => void;
+  clearUser: () => void;
+}

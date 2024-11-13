@@ -16,15 +16,16 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-        "baseUrl": "./",
-
+    "baseUrl": "./"
   },
-   "paths": {
-      "src/*": ["./*"]
-    },
-"include": [
-  "src",
+  "paths": {
+    "src/*": ["./*"]
+  },
+  "include": [
+    "src",
     "cypress/**/*.ts",
     "cypress/**/*.tsx",
-    "node_modules/cypress/types/**/*.d.ts"
-, "cypress"  ],}
+    "node_modules/cypress/types/**/*.d.ts",
+    "cypress"
+  ]
+}

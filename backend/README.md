@@ -22,7 +22,7 @@ This project consists of a suite of automated tests for an API that includes aut
 
 ## Prerequisites
 
-- Node.js installed (preferably the latest stable version).
+- Node.js (version 14.x or higher)
 - Access to the API (set in the `baseUrl`).
 - Valid credentials for the test user (Note: Replace credentials with actual values if needed).
 

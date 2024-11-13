@@ -1,7 +1,7 @@
 // ProtectedRoute.tsx
-import React from 'react';
-import { Navigate } from 'react-router-dom';
-import { useAuth } from './context/auth-context';
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "./context/auth-context";
 
 interface ProtectedRouteProps {
   children: JSX.Element;

@@ -1,4 +1,4 @@
-// global.d.ts 
+// global.d.ts
 interface Window {
-  __store__: any; 
+  __store__: any;
 }

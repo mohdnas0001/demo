@@ -1,16 +1,16 @@
-const webpack = require('@cypress/webpack-preprocessor');
+const webpack = require("@cypress/webpack-preprocessor");
 
 module.exports = (on, config) => {
   const options = {
     webpackOptions: {
       resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: [".ts", ".tsx", ".js"],
       },
       module: {
         rules: [
           {
             test: /\.(ts|tsx)$/,
-            loader: 'ts-loader',
+            loader: "ts-loader",
             exclude: /node_modules/,
           },
         ],
@@ -18,6 +18,6 @@ module.exports = (on, config) => {
     },
   };
 
-  on('file:preprocessor', webpack(options));
+  on("file:preprocessor", webpack(options));
   return config;
 };

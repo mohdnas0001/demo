@@ -1,20 +1,17 @@
-import { Item } from '../../../types';
-import apiClient from '../apiClient';
+import { Item } from "../../../types";
+import apiClient from "../apiClient";
 
 // Fetch items
 export const fetchItems = async (): Promise<Item[]> => {
-  const response = await apiClient.get<Item[]>('/items?join=user');
+  const response = await apiClient.get<Item[]>("/items?join=user");
   return response.data;
 };
 
-
-
-
 // Create a new item
 export const createItem = async (
-  newItem: Omit<Item, 'id' | 'createdAt' | 'updatedAt'>,
+  newItem: Omit<Item, "id" | "createdAt" | "updatedAt">,
 ): Promise<Item> => {
-  const response = await apiClient.post<Item>('/items', newItem);
+  const response = await apiClient.post<Item>("/items", newItem);
   return response.data;
 };
 

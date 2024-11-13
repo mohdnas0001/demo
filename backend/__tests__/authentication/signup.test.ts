@@ -57,7 +57,7 @@ describe("Signup Tests", () => {
     });
     const responseTime = Date.now() - start;
 
-    expect(responseTime).toBeLessThan(800); // 300 ms as acceptable range
+    expect(responseTime).toBeLessThan(300); // 300 ms as acceptable range
   });
 });
 
