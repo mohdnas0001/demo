@@ -1,5 +1,5 @@
 import request from "supertest";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constant";
 
 jest.setTimeout(10000);
 

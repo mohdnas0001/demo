@@ -1,12 +1,12 @@
 import request from "supertest";
-import { baseUrl } from "../../constant";
+import { baseUrl } from "../../../constant";
 
 jest.setTimeout(10000);
 
 describe("Signup Tests", () => {
   test("Response status code is 201", async () => {
     const response = await request(baseUrl).post("/auth/signup").send({
-      username: "nasir9",
+      username: "nasir1433",
       password: "nasir",
     });
     expect(response.status).toBe(201);
@@ -14,7 +14,7 @@ describe("Signup Tests", () => {
 
   test("Response has the required fields", async () => {
     const response = await request(baseUrl).post("/auth/signup").send({
-      username: "nasir90",
+      username: "nasir1434",
       password: "nasir",
     });
     expect(response.body).toBeDefined();
@@ -29,7 +29,7 @@ describe("Signup Tests", () => {
 
   test("Username is a non-empty string", async () => {
     const response = await request(baseUrl).post("/auth/signup").send({
-      username: "nasir22",
+      username: "nasir1444",
       password: "nasir",
     });
 
@@ -40,7 +40,7 @@ describe("Signup Tests", () => {
 
   test("Password is a non-empty string", async () => {
     const response = await request(baseUrl).post("/auth/signup").send({
-      username: "nasir42",
+      username: "nasir42222",
       password: "nasir",
     });
 
@@ -52,7 +52,7 @@ describe("Signup Tests", () => {
   test("Response time is within an acceptable range", async () => {
     const start = Date.now();
     const response = await request(baseUrl).post("/auth/signup").send({
-      username: "nasir5",
+      username: "nasir5544",
       password: "nasir",
     });
     const responseTime = Date.now() - start;

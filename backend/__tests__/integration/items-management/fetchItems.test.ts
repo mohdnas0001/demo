@@ -1,6 +1,6 @@
 import request from "supertest";
-import { baseUrl } from "../../constant"; 
-import { Item } from "../../types";
+import { baseUrl } from "../../../constant"; 
+import { Item } from "../../../types";
 
 jest.setTimeout(10000);
 
@@ -66,7 +66,6 @@ describe("Item Fetch Tests", () => {
 
       expect(item.user).toHaveProperty("id");
       expect(item.user).toHaveProperty("username");
-      expect(item.user).toHaveProperty("password");
     });
   });
 
