@@ -9,11 +9,37 @@ This project consists of a suite of automated tests for an API that includes aut
 - **Incorrect Login Credentials**: Ensures that the system properly handles failed login attempts due to incorrect credentials.
 - **Token Expiration and Refresh**: Tests to verify if the token expires and if refreshing is needed (Note: Token expiration and refresh are skipped due to the lack of endpoints.)
 
-### Item Management
-- **Create, Update, and Delete Items**: Ensures the API allows creation, updating, and deletion of items.
-- **Fetch Items**: Validates that the API can fetch a single item or all items correctly.
-- **Access Control**: Verifies that only the owner of an item can modify or delete it.
-- **Edge Cases**: Tests for handling of invalid input or duplicate items.
+# Item Management Tests
+
+This section includes both **unit** and **integration** tests for managing items via the API. The unit tests verify the behavior of individual item-related operations, while the integration tests ensure the correct functioning of authentication, authorization, and edge case handling.
+
+## Unit Tests
+
+### **Create, Update, and Delete Items**
+These unit tests verify that the API correctly handles the creation, updating, and deletion of items when each operation is tested independently.
+
+- **Create Item**: Verifies that the API allows creating a new item with valid data.
+- **Update Item**: Verifies that the API can update an existing item with valid changes.
+- **Delete Item**: Verifies that the API correctly deletes an item when requested.
+
+### **Fetch Items**
+These tests ensure that the API can correctly retrieve either a single item or a list of items, ensuring the data is returned in the expected format.
+
+- **Fetch All Items**: Verifies that the API can retrieve all items and the data is returned as an array.
+- **Fetch Single Item**: Verifies that the API can retrieve a single item by its ID and the data is returned in the correct format.
+
+## Integration Tests
+
+### **Access Control**
+Integration tests ensure that only the owner of an item can modify or delete it. These tests verify that the proper application of authentication and authorization is in place.
+
+- **Ownership Verification**: Verifies that only the authenticated user who owns the item can perform operations like update or delete.
+
+### **Edge Cases**
+These tests focus on verifying how the API handles invalid inputs and edge cases, such as missing required fields or attempts to add duplicate items.
+
+- **Invalid Input Handling**: Verifies that the API responds with appropriate error messages when required fields are missing or the input is malformed.
+
 
 ### API Response Validation
 - **Response Status Codes**: Verifies that the correct status codes are returned for various actions (e.g., 200, 201, 404, 401).
